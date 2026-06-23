@@ -1,0 +1,75 @@
+.journey {
+  position: relative;
+  background: transparent;
+}
+
+.journey-pin {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.journey-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.journey-head {
+  position: absolute;
+  top: 3.2rem;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  text-align: center;
+}
+
+.journey-caption {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  max-width: 300px;
+  opacity: 0;
+  transition: opacity 0.2s linear;
+}
+
+.cap-right { right: 8%; text-align: right; }
+.cap-left { left: 8%; text-align: left; }
+.cap-center { left: 50%; transform: translate(-50%, 120px); text-align: center; }
+
+.cap-step {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--glow-orange);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.journey-caption h3 {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6rem;
+}
+
+.journey-caption p {
+  font-size: 0.92rem;
+  color: var(--text-soft);
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .cap-right, .cap-left { max-width: 200px; }
+  .cap-right { right: 5%; }
+  .cap-left { left: 5%; }
+  .journey-caption h3 { font-size: 1.2rem; }
+  .journey-caption p { font-size: 0.82rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-caption { opacity: 1 !important; position: static; transform: none; max-width: none; text-align: center; margin: 2rem auto; }
+  .journey-pin { height: auto; padding-bottom: 3rem; }
+  .journey-canvas { position: relative; height: 60vh; }
+}

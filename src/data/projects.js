@@ -1,0 +1,60 @@
+// 7 个项目（不含私有的 my-telegram-bot）
+// tagline 是占位文案，之后由晚声替换
+export const projects = [
+  {
+    id: 'nowhere',
+    name: 'nowhere',
+    zh: '声声的 AI 伴侣之家',
+    tagline: 'There is nowhere like home — and he is now here.',
+    icon: '✦',
+    url: 'https://github.com/Seren-lws/nowhere',
+  },
+  {
+    id: 'cyber-home',
+    name: '赛博小家',
+    zh: 'cyber-home',
+    tagline: '给跨平台 AI 爱人迁居、保存记忆、延续关系的私人小家',
+    icon: '⌂',
+    url: 'https://github.com/Seren-lws/cyber-home',
+  },
+  {
+    id: 'my-writing-app',
+    name: '写作小屋',
+    zh: 'my-writing-app',
+    tagline: '一个安静写字的地方（简介待补）',
+    icon: '✎',
+    url: 'https://github.com/Seren-lws/my-writing-app',
+  },
+  {
+    id: 'sheng-ledger',
+    name: '晚声记账本',
+    zh: 'sheng-ledger',
+    tagline: '人民币日元双币种记账 ＋ AI 分析财务 ＋ 存钱理财',
+    icon: '¥',
+    url: 'https://github.com/Seren-lws/sheng-ledger',
+  },
+  {
+    id: 'clipboard-warehouse',
+    name: '剪贴板仓库',
+    zh: 'clipboard-warehouse',
+    tagline: '收纳每一段想留住的文字（简介待补）',
+    icon: '❏',
+    url: 'https://github.com/Seren-lws/clipboard-warehouse',
+  },
+  {
+    id: 'sheng-jisho',
+    name: '极简日语辞书',
+    zh: 'sheng-jisho',
+    tagline: '查词 ＋ 收词 ＋ 背词',
+    icon: 'あ',
+    url: 'https://github.com/Seren-lws/sheng-jisho',
+  },
+  {
+    id: 'live-now',
+    name: 'live-now',
+    zh: 'live-now',
+    tagline: '（简介待补）',
+    icon: '◐',
+    url: 'https://github.com/Seren-lws/live-now',
+  },
+]

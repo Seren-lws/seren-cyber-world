@@ -1,0 +1,19 @@
+.scroll-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sbg-layer {
+  position: absolute;
+  inset: 0;
+  will-change: opacity;
+}
+
+/* 底色常亮，避免任何时刻出现空隙 */
+.sbg-base {
+  opacity: 1;
+  background: linear-gradient(180deg, #271b39 0%, #181430 100%);
+}

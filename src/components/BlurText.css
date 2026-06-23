@@ -1,0 +1,30 @@
+.blur-text {
+  display: inline;
+}
+
+.blur-text-part {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(10px);
+  animation-name: blur-in;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes blur-in {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blur-text-part {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    animation: none;
+  }
+}

@@ -1,0 +1,24 @@
+.shiny-text {
+  display: inline;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  background-position: 150% center;
+  animation-name: shiny-sweep;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes shiny-sweep {
+  0% { background-position: 150% center; }
+  50% { background-position: -50% center; }
+  100% { background-position: -50% center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shiny-text {
+    animation: none;
+    background-position: 50% center;
+  }
+}

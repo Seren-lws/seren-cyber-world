@@ -1,0 +1,49 @@
+.who {
+  position: relative;
+  overflow: hidden;
+  /* 背景交给贯穿全站的渐变层，这里保持透明 */
+  background: transparent;
+  /* 撑满一屏，跳转过来不会露出下一屏 */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.who-inner {
+  width: 100%;
+}
+
+.who-rays {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.who-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.who-body {
+  max-width: 640px;
+  font-size: 1.05rem;
+  line-height: 2;
+  color: var(--text-soft);
+}
+
+.who-body p {
+  margin: 0 0 1.1rem;
+}
+
+.who-lead {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--text-warm);
+  margin-bottom: 1.4rem !important;
+}
+
+.who-em {
+  color: var(--glow-orange);
+  font-weight: 400;
+}

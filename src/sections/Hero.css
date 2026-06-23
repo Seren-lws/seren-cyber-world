@@ -1,0 +1,104 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+/* 底部往夜色过渡，衔接下一屏 */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(24, 20, 49, 0.25) 0%, rgba(24, 20, 49, 0) 35%, rgba(24, 20, 49, 0.6) 100%);
+}
+
+.hero-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem 2rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+}
+
+.hero-brand { color: var(--text-soft); }
+
+.hero-links { display: flex; gap: 1.8rem; }
+.hero-links a {
+  color: var(--text-faint);
+  transition: color 0.3s ease;
+}
+.hero-links a:hover { color: var(--text-warm); }
+
+.hero-center {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 1.5rem;
+  max-width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 7vw, 4.8rem);
+  line-height: 1.14;
+  color: #ffffff;
+  text-shadow: 0 2px 24px rgba(40, 20, 50, 0.3);
+  padding: 0 0.35em;
+  overflow-wrap: break-word;
+}
+
+.hero-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 2.4vw, 1.4rem);
+  letter-spacing: 0.34em;
+  color: var(--glow-pink);
+  margin: 1.2rem 0 0;
+  padding-left: 0.34em;
+}
+
+.hero-scroll {
+  position: absolute;
+  z-index: 3;
+  bottom: 2.2rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  animation: hero-bob 2.6s ease-in-out infinite;
+}
+
+.hero-scroll-arrow { display: block; font-size: 1.4rem; line-height: 1; }
+.hero-scroll-text { display: block; margin-top: 0.3rem; }
+
+@keyframes hero-bob {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+@media (max-width: 640px) {
+  .hero-links { gap: 1.1rem; }
+  .hero-subtitle { letter-spacing: 0.22em; }
+}

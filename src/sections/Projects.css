@@ -1,0 +1,162 @@
+.works-lead {
+  max-width: 560px;
+  color: var(--text-soft);
+  margin: -0.5rem 0 0;
+}
+
+/* —— 绕行舞台 —— */
+.orbit-stage {
+  position: relative;
+  width: 100%;
+  height: 540px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  --r: 230px;
+}
+
+.orbit {
+  position: relative;
+  width: 1px;
+  height: 1px;
+  animation: orbit-spin 48s linear infinite;
+}
+.orbit-stage:hover .orbit,
+.orbit-stage:hover .tile-spin { animation-play-state: paused; }
+
+/* 1. 放到圆周上的点（随容器自转） */
+.orbit-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(var(--a)) translateX(var(--r));
+}
+/* 2. 居中 + 抵消静态角度（不动画） */
+.tile-pos {
+  position: absolute;
+  transform: translate(-50%, -50%) rotate(calc(-1 * var(--a)));
+}
+/* 3. 抵消容器自转，保持正立（动画） */
+.tile-spin {
+  animation: orbit-spin-rev 48s linear infinite;
+}
+
+.tile {
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  border: 1px solid rgba(246, 239, 230, 0.18);
+  background: radial-gradient(circle at 50% 35%, rgba(217, 138, 78, 0.28), rgba(33, 28, 56, 0.92));
+  color: var(--text-warm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.tile:hover,
+.tile.is-active {
+  border-color: var(--glow-orange);
+  box-shadow: 0 0 28px rgba(217, 138, 78, 0.5);
+  transform: scale(1.14);
+}
+
+.tile-icon { font-size: 1.7rem; line-height: 1; }
+.tile-name {
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 0 6px;
+}
+
+.orbit-core {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  pointer-events: none;
+}
+.orbit-core-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 24px 6px rgba(255, 255, 255, 0.7);
+}
+.orbit-core-text {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes orbit-spin-rev {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* —— 详情卡 —— */
+.work-detail { margin-top: 2.5rem; display: flex; justify-content: center; }
+.work-detail-card {
+  position: relative;
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  max-width: 540px;
+  width: 100%;
+  padding: 1.4rem 1.6rem;
+  background: rgba(33, 28, 56, 0.7);
+  border: 1px solid rgba(246, 239, 230, 0.15);
+  border-radius: 16px;
+}
+.work-detail-icon { font-size: 2rem; line-height: 1.2; }
+.work-detail-body h3 { font-family: var(--font-serif); font-size: 1.3rem; }
+.work-detail-zh { color: var(--text-faint); font-size: 0.82rem; margin: 0.1rem 0 0.6rem; }
+.work-detail-tag { color: var(--text-soft); margin: 0 0 0.9rem; }
+.work-detail-link { color: var(--glow-orange); font-size: 0.95rem; }
+.work-detail-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.9rem;
+  background: none;
+  border: none;
+  color: var(--text-faint);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* —— 减少动态 / 移动端：静态网格 —— */
+.works-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.work-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.3rem;
+  background: rgba(33, 28, 56, 0.6);
+  border: 1px solid rgba(246, 239, 230, 0.14);
+  border-radius: 14px;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.work-card:hover { border-color: var(--glow-orange); transform: translateY(-3px); }
+.work-card h3 { font-family: var(--font-serif); font-size: 1.15rem; }
+.work-card p { color: var(--text-soft); font-size: 0.9rem; margin: 0; }
+
+@media (max-width: 720px) {
+  .orbit-stage { height: 420px; --r: 150px; }
+  .tile { width: 92px; height: 92px; }
+  .tile-name { font-size: 0.72rem; }
+}
