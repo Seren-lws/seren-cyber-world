@@ -10,6 +10,13 @@
   overflow: hidden;
 }
 
+.journey-galaxy {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
 .journey-canvas {
   position: absolute;
   inset: 0;

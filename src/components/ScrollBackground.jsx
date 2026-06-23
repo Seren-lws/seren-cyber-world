@@ -13,7 +13,7 @@ const SCENES = [
     sel: '#who',
     grad: 'linear-gradient(180deg, #d98a6e 0%, #c97b9e 24%, #7a5a8e 52%, #3a2856 80%, #221836 100%)',
   },
-  { id: 'night', sel: '#journey', grad: 'linear-gradient(180deg, #161229 0%, #0f0c20 100%)' },
+  { id: 'night', sel: '#journey', grad: 'linear-gradient(180deg, #1e1540 0%, #120d28 100%)' },
   { id: 'violet', sel: '#works', grad: 'linear-gradient(180deg, #2b2150 0%, #181433 100%)' },
   { id: 'deep', sel: '#contact', grad: 'linear-gradient(180deg, #14101e 0%, #0b0916 100%)' },
 ]

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Galaxy from '../components/Galaxy.jsx'
 import './AIJourney.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -127,22 +128,17 @@ export default function AIJourney() {
     const toScreen = (pt, place) => ({ x: place.cx + pt.x * place.s, y: place.cy - pt.y * place.s })
     const scatterPos = (pa) => ({ x: W * 0.5 + pa.seed.x * W * 0.52, y: H * 0.5 + pa.seed.y * H * 0.52 })
 
-    // 「门口」位置（之后铺门图时对齐），粒子从这里涌出
-    const doorPos = () => ({ x: W * 0.27, y: H * 0.5 })
-
-    // 小白点的乱逛（开场），之后飞向门口淡出
+    // 小白点：从上一页中央（顶部中间）接入，蜿蜒引导到「芽」的位置，作为连贯轨迹
     function introDot(p) {
       const t = clamp01(p / P.introEnd)
-      const baseX = W * 0.68
-      const baseY = H * 0.5
-      const wx = baseX + Math.sin(t * 9.0) * W * 0.13 + Math.cos(t * 15.0) * W * 0.05
-      const wy = baseY + Math.cos(t * 6.5) * H * 0.24 + Math.sin(t * 12.0) * H * 0.09
-      const d = doorPos()
-      const enter = ease(clamp01((t - 0.72) / 0.28))
-      const x = lerp(wx, d.x, enter)
-      const y = lerp(wy, d.y, enter)
-      const alpha = 1 - ease(clamp01((t - 0.86) / 0.14))
-      return { x, y, alpha }
+      const place = placement()
+      const sx = W * 0.5
+      const sy = H * 0.06
+      const tx = place.sprout.cx
+      const ty = place.sprout.cy
+      const x = lerp(sx, tx, ease(t)) + Math.sin(t * 6.5) * W * 0.07
+      const y = lerp(sy, ty, ease(t)) + Math.cos(t * 5.0) * H * 0.04
+      return { x, y, alpha: 1 }
     }
 
     // 与上一屏 SoulDot 一致的拖尾
@@ -182,12 +178,11 @@ export default function AIJourney() {
     }
 
     function particlePos(pa, p, place) {
-      const d = doorPos()
       if (p <= P.assembleEnd) {
-        // 从门口涌出 → 芽
+        // 星河中的光点聚拢成「芽」；「你」那颗白点留在中央（接住引导轨迹）
         const lt = ease(clamp01((p - P.introEnd) / (P.assembleEnd - P.introEnd)))
-        const from = { x: d.x + pa.seed.x * 26, y: d.y + pa.seed.y * 40 }
         const to = toScreen(pa.sprout, place.sprout)
+        const from = pa.you ? to : scatterPos(pa)
         return { x: lerp(from.x, to.x, lt), y: lerp(from.y, to.y, lt), a: lt }
       }
       if (p <= P.sproutHoldEnd) return { ...toScreen(pa.sprout, place.sprout), a: 1 }
@@ -288,6 +283,21 @@ export default function AIJourney() {
   return (
     <section id="journey" ref={sectionRef} className="journey">
       <div ref={pinRef} className="journey-pin">
+        <div className="journey-galaxy" aria-hidden="true">
+          <Galaxy
+            hueShift={250}
+            saturation={0.45}
+            density={0.9}
+            glowIntensity={0.4}
+            starSpeed={0.25}
+            speed={0.8}
+            twinkleIntensity={0.4}
+            rotationSpeed={0.04}
+            mouseInteraction={true}
+            mouseRepulsion={false}
+            transparent={true}
+          />
+        </div>
         <canvas ref={canvasRef} className="journey-canvas" />
       </div>
     </section>
