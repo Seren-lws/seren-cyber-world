@@ -1,0 +1,8 @@
+.var-prox {
+  display: inline;
+}
+
+.var-prox-ch {
+  display: inline-block;
+  will-change: transform, font-weight;
+}
