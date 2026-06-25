@@ -10,9 +10,17 @@
   --text-soft: rgba(246, 239, 230, 0.72);
   --text-faint: rgba(246, 239, 230, 0.5);
 
-  --font-script: 'Pinyon Script', cursive;
+  --font-display: 'Cormorant Garamond', 'Noto Serif SC', serif;
   --font-serif: 'Noto Serif SC', serif;
   --font-sans: 'Noto Sans SC', system-ui, sans-serif;
+
+  /* v2 紫黄鎏金色卡 */
+  --v2-purple: #433763;
+  --v2-purple-deep: #2e2547;
+  --v2-ginger: #f1e1a8;
+  --v2-gold: #fde374;
+  --v2-ink: #3a2f55;
+  --v2-cream: #f3e8ce;
 
   --maxw: 1080px;
 }
