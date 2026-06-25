@@ -1,0 +1,123 @@
+.book-scene {
+  position: relative;
+  height: 100vh;
+}
+
+.book-pin {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: #2e2547;
+}
+
+.book-sky {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(120% 90% at 50% 38%, #3a2f5e 0%, #2a2148 55%, #211a3a 100%);
+}
+
+.book-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #fde374;
+  box-shadow: 0 0 6px 1px rgba(253, 227, 116, 0.8);
+  animation: book-twinkle 3.4s ease-in-out infinite;
+}
+@keyframes book-twinkle { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+/* 舞台（含透视），整体可放大 */
+.book-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1600px;
+}
+
+.book {
+  position: relative;
+  width: clamp(220px, 24vw, 320px);
+  height: clamp(300px, 33vw, 440px);
+  transform-style: preserve-3d;
+}
+
+/* 内页（淡姜黄） */
+.book-page {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px 10px 10px 6px;
+  background: #f1e1a8;
+  border: 1px solid rgba(253, 227, 116, 0.5);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.book-page-label {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  color: #8a5fd6;
+}
+
+/* 封面（绕书脊翻开） */
+.book-cover {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px 10px 10px 6px;
+  transform-origin: left center;
+  transform: translateZ(2px);
+  background: linear-gradient(135deg, #4a3a6b 0%, #2e2547 100%);
+  border: 1px solid rgba(253, 227, 116, 0.6);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+.book-emblem { font-size: 1.6rem; color: var(--v2-gold); }
+.book-cover-title {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  color: #f7e9bf;
+  letter-spacing: 0.1em;
+}
+.book-tape {
+  position: absolute;
+  width: 38px;
+  height: 26px;
+  background: rgba(253, 227, 116, 0.55);
+  border: 1px solid rgba(253, 227, 116, 0.7);
+}
+.book-tape-tr { top: -6px; right: 16px; transform: rotate(8deg); }
+.book-tape-bl { bottom: -6px; left: 16px; transform: rotate(8deg); }
+
+/* 光点 */
+.book-dot {
+  position: absolute;
+  top: 38%;
+  left: calc(50% + 180px);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff7e0;
+  box-shadow: 0 0 22px 6px rgba(253, 227, 116, 0.95), 0 0 48px 18px rgba(253, 227, 116, 0.4);
+  z-index: 3;
+}
+
+/* 末尾铺满的黄页（无缝接「我是谁」黄页） */
+.book-fill {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: #f1e1a8;
+  transform: scaleY(0);
+  transform-origin: 50% 100%;
+  will-change: transform;
+}

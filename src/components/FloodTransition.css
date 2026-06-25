@@ -1,0 +1,57 @@
+.flood-seg {
+  position: relative;
+  height: 100vh;
+}
+
+.flood-pin {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: #2e2547;
+}
+
+.flood-purple {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(120% 90% at 50% 30%, #3a2f5e 0%, #2a2148 55%, #211a3a 100%);
+}
+
+.flood-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #fde374;
+  box-shadow: 0 0 6px 1px rgba(253, 227, 116, 0.8);
+  animation: flood-twinkle 3.2s ease-in-out infinite;
+}
+
+@keyframes flood-twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.flood-yellow {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: #f1e1a8;
+  transform: scaleY(0);
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+.flood-guide {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -7px 0 0 -7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  z-index: 3;
+  background: #fff7e0;
+  box-shadow: 0 0 22px 6px rgba(253, 227, 116, 0.95), 0 0 48px 18px rgba(253, 227, 116, 0.4);
+  will-change: transform, opacity;
+}

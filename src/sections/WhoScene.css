@@ -1,0 +1,164 @@
+.ws-scene {
+  position: relative;
+  height: 100vh;
+}
+
+.ws-pin {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: #2e2547;
+}
+
+/* —— 后面的星夜 —— */
+.ws-night {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* 比首页(#433763)稍深一点点的紫，衔接不割裂 */
+  background: radial-gradient(130% 100% at 50% 32%, #3e3260 0%, #342a52 58%, #2a2147 100%);
+}
+
+.ws-lightfall {
+  position: absolute;
+  inset: 0;
+  opacity: 0.95;
+}
+
+.ws-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #fde374;
+  box-shadow: 0 0 6px 1px rgba(253, 227, 116, 0.8);
+  animation: ws-twinkle 3.6s ease-in-out infinite;
+}
+@keyframes ws-twinkle { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+.ws-moon {
+  position: absolute;
+  top: 14%;
+  right: 18%;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 38%, #fde374 0%, #e3b94e 60%, rgba(227,185,78,0) 72%);
+  box-shadow: 0 0 36px 10px rgba(253, 227, 116, 0.35);
+  animation: ws-moon 6s ease-in-out infinite;
+}
+@keyframes ws-moon { 0%,100%{opacity:.7; transform:scale(1)} 50%{opacity:1; transform:scale(1.06)} }
+
+/* —— 书 / 书页 —— */
+.ws-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1800px;
+}
+
+.ws-page {
+  position: relative;
+  width: clamp(300px, 34vw, 380px);
+  height: clamp(420px, 46vw, 520px);
+  border-radius: 6px 12px 12px 6px;
+  background: #f1e1a8;
+  border: 1px solid rgba(253, 227, 116, 0.5);
+  /* 厚度：右下叠出书页块 + 投影 */
+  box-shadow:
+    2px 3px 0 #e7d49a,
+    5px 7px 0 #ddc78c,
+    8px 11px 0 #d3ba7e,
+    11px 15px 0 #c9ad70,
+    14px 19px 0 #bfa264,
+    0 44px 90px rgba(0, 0, 0, 0.55);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.ws-cover {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px 12px 12px 6px;
+  transform-origin: left center;
+  transform: translateZ(6px);
+  background: linear-gradient(135deg, #4a3a6b 0%, #2e2547 100%);
+  border: 1px solid rgba(253, 227, 116, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  backface-visibility: hidden;
+}
+/* 书脊 */
+.ws-cover::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  background: linear-gradient(90deg, #15101f 0%, #3a2f5e 100%);
+  border-right: 1px solid rgba(253, 227, 116, 0.4);
+  border-radius: 6px 0 0 6px;
+}
+.ws-emblem { font-size: 1.3rem; color: var(--v2-gold); }
+.ws-cover-title {
+  font-family: var(--font-script);
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--v2-gold);
+  transform: rotate(-10deg);
+  text-shadow: 0 2px 14px rgba(253, 227, 116, 0.35);
+}
+
+.ws-dot {
+  position: absolute;
+  top: 40%;
+  left: calc(50% + 170px);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff7e0;
+  box-shadow: 0 0 22px 6px rgba(253, 227, 116, 0.95), 0 0 48px 18px rgba(253, 227, 116, 0.4);
+  z-index: 2;
+}
+
+/* —— 介绍文字（固定层） —— */
+.ws-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: clamp(300px, 88vw, 600px);
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  line-height: 1.95;
+  color: #3a2f55;
+  text-align: left;
+}
+.ws-text p { margin: 0 0 1rem; }
+.ws-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  color: #8a5fd6;
+  margin-bottom: 1.4rem !important;
+}
+.ws-lead {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  color: #2e2547;
+  margin-bottom: 1.3rem !important;
+}
+.ws-em { color: #6b3fb0; font-weight: 500; }
+
+@media (max-width: 720px) {
+  .ws-text { font-size: 0.92rem; }
+  .ws-lead { font-size: 1.4rem; }
+}

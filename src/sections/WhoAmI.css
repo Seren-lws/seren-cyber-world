@@ -1,54 +1,44 @@
-.who {
+.whoy {
   position: relative;
-  overflow: hidden;
-  /* 背景交给贯穿全站的渐变层，这里保持透明 */
-  background: transparent;
-  /* 撑满一屏，跳转过来不会露出下一屏 */
+  background: #f1e1a8;
+  color: #3a2f55;
   min-height: 100vh;
   display: flex;
   align-items: center;
 }
 
-.who-inner {
+.whoy-inner {
   width: 100%;
 }
 
-.who-rays {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.who-inner {
-  position: relative;
-  z-index: 1;
-}
-
-.who .eyebrow {
+.whoy-body {
+  max-width: 660px;
   font-family: var(--font-serif);
-}
-
-.who-body {
-  max-width: 640px;
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   line-height: 2;
-  color: var(--text-soft);
+  color: #4a3d63;
 }
 
-.who-body p {
-  margin: 0 0 1.1rem;
+.whoy-body p {
+  margin: 0 0 1.2rem;
 }
 
-.who-lead {
+.whoy-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  color: #8a5fd6;
+  margin-bottom: 1.6rem !important;
+}
+
+.whoy-lead {
   font-family: var(--font-serif);
-  font-size: 1.6rem;
-  color: var(--text-warm);
-  margin-bottom: 1.4rem !important;
+  font-size: 1.8rem;
+  color: #2e2547;
+  margin-bottom: 1.5rem !important;
 }
 
-.who-em {
-  color: var(--glow-orange);
-  font-weight: 400;
+.whoy-em {
+  color: #6b3fb0;
+  font-weight: 500;
 }

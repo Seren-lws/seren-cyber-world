@@ -10,6 +10,7 @@
   --text-soft: rgba(246, 239, 230, 0.72);
   --text-faint: rgba(246, 239, 230, 0.5);
 
+  --font-script: 'Pinyon Script', cursive;
   --font-display: 'Cormorant Garamond', 'Noto Serif SC', serif;
   --font-serif: 'Noto Serif SC', serif;
   --font-sans: 'Noto Sans SC', system-ui, sans-serif;
@@ -40,7 +41,7 @@ html.lenis, html.lenis body { height: auto; }
 
 body {
   margin: 0;
-  background: var(--night-deep);
+  background: var(--v2-purple-deep);
   color: var(--text-warm);
   font-family: var(--font-sans);
   font-weight: 300;

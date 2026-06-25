@@ -38,7 +38,6 @@ export default function Hero() {
         {STARS.map((s, i) => (
           <span key={i} className="tw" style={{ top: s.top, left: s.left, animationDelay: `${s.d}s` }} />
         ))}
-        <span className="hero-you" />
       </div>
 
       <nav className="hero-nav">

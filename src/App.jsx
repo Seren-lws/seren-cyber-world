@@ -2,13 +2,9 @@ import { useEffect } from 'react'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import ScrollBackground from './components/ScrollBackground.jsx'
-import SoulDot from './components/SoulDot.jsx'
 import Hero from './sections/Hero.jsx'
-import WhoAmI from './sections/WhoAmI.jsx'
-import AIJourney from './sections/AIJourney.jsx'
-import Projects from './sections/Projects.jsx'
-import Footer from './sections/Footer.jsx'
+import WhoScene from './sections/WhoScene.jsx'
+import GuideDot from './components/GuideDot.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -37,15 +33,9 @@ export default function App() {
 
   return (
     <>
-      <ScrollBackground />
-      <SoulDot />
-      <div className="content">
-        <Hero />
-        <WhoAmI />
-        <AIJourney />
-        <Projects />
-        <Footer />
-      </div>
+      <Hero />
+      <WhoScene />
+      <GuideDot />
     </>
   )
 }
