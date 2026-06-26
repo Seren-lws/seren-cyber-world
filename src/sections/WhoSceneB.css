@@ -1,0 +1,130 @@
+.wb-scene {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(130% 110% at 50% 38%, #2e2150 0%, #211743 55%, #160e2c 100%);
+}
+
+.wb-back {
+  position: absolute;
+  inset: -3%;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+
+.wb-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.6;
+  mix-blend-mode: screen;
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 38%, transparent 70%);
+  mask-image: linear-gradient(to top, #000 0%, #000 38%, transparent 70%);
+  pointer-events: none;
+}
+
+.wb-stars {
+  position: absolute;
+  inset: -3%;
+  z-index: 1;
+  pointer-events: none;
+}
+.wb-star {
+  position: absolute;
+  border-radius: 50%;
+  background: #fde374;
+  box-shadow: 0 0 6px 1px rgba(253, 227, 116, 0.7);
+  opacity: 0.4;
+  animation: wb-twinkle 3.6s ease-in-out infinite;
+}
+@keyframes wb-twinkle {
+  0%, 100% { opacity: 0.18; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.wb-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1500px;
+}
+
+.wb-glow {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  width: 680px;
+  height: 380px;
+  z-index: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(253, 227, 116, 0.32) 0%, rgba(253, 227, 116, 0.1) 42%, rgba(253, 227, 116, 0) 68%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.wb-island-wrap {
+  position: relative;
+  z-index: 2;
+  width: min(66vw, 940px);
+  will-change: transform;
+}
+.wb-island {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 36px 70px rgba(0, 0, 0, 0.55));
+}
+
+/* 小屋呼吸的窗光晕 */
+.wb-house-glow {
+  position: absolute;
+  left: 48%;
+  top: 41%;
+  width: 96px;
+  height: 96px;
+  margin: -48px 0 0 -48px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 212, 134, 0.6) 0%, rgba(255, 200, 120, 0.18) 45%, rgba(255, 200, 120, 0) 68%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: wb-house-breathe 4.6s ease-in-out infinite;
+}
+@keyframes wb-house-breathe {
+  0%, 100% { opacity: 0.45; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.14); }
+}
+
+/* 绕树飞的小光点 */
+.wb-treedot {
+  position: absolute;
+  left: 48%;
+  top: 24%;
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border-radius: 50%;
+  background: #fff4cc;
+  box-shadow: 0 0 9px 2px rgba(253, 227, 116, 0.9), 0 0 18px 5px rgba(253, 227, 116, 0.35);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.wb-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 22px;
+  z-index: 3;
+  text-align: center;
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: rgba(243, 232, 206, 0.6);
+}

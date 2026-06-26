@@ -3,6 +3,7 @@ import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Hero from './sections/Hero.jsx'
+import IslandScene from './sections/IslandScene.jsx'
 import WhoScene from './sections/WhoScene.jsx'
 import JourneyScene from './sections/JourneyScene.jsx'
 import GuideDot from './components/GuideDot.jsx'
@@ -35,6 +36,7 @@ export default function App() {
   return (
     <>
       <Hero />
+      <IslandScene />
       <WhoScene />
       <JourneyScene />
       <GuideDot />

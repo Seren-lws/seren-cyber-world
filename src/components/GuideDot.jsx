@@ -24,53 +24,25 @@ export default function GuideDot() {
     const build = () => {
       const W = window.innerWidth
       const H = window.innerHeight
-      const hero = { x: W * 0.56, y: H * 0.46 }
-      const hand = { x: W * 0.5, y: H * 0.62 }
-      const beside = { x: W * 0.5 + 170, y: H * 0.42 }
-      const into = { x: W * 0.5, y: H * 0.5 }
+      const hero = { x: W * 0.62, y: H * 0.45 }
+      // 门会随滚动上移，所以落点取它上移途中的位置（斜上方），让光点"追上门"
+      const door = { x: W * 0.3, y: H * 0.22 }
 
       gsap.set(el, { x: hero.x, y: hero.y, autoAlpha: 1 })
 
-      // 阶段一：首页里随滚动向下走 → 交接点
+      // 首页：滚动初段，光点从标题旁快速斜上飞、追上正在上移的门，进门淡出
       sts.push(
         ScrollTrigger.create({
           trigger: '.hero',
           start: 'top top',
           end: 'bottom top',
-          scrub: 0.6,
+          scrub: 0.5,
           onUpdate: (self) => {
             const p = self.progress
-            gsap.set(el, { x: lerp(hero.x, hand.x, p), y: lerp(hero.y, hand.y, p), autoAlpha: 1 })
-          },
-        }),
-      )
-
-      // 阶段二：第二页（书的场景，钉住）里 → 走到书旁 → 钻进书 → 隐去
-      sts.push(
-        ScrollTrigger.create({
-          trigger: '.ws-scene',
-          start: 'top top',
-          end: '+=3000',
-          scrub: 0.6,
-          onUpdate: (self) => {
-            const p = self.progress
-            let x, y, o
-            if (p < 0.2) {
-              const t = p / 0.2
-              x = lerp(hand.x, beside.x, t)
-              y = lerp(hand.y, beside.y, t)
-              o = 1
-            } else if (p < 0.44) {
-              const t = (p - 0.2) / 0.24
-              x = lerp(beside.x, into.x, t)
-              y = lerp(beside.y, into.y, t)
-              o = 1 - clamp01((p - 0.32) / 0.12)
-            } else {
-              x = into.x
-              y = into.y
-              o = 0
-            }
-            gsap.set(el, { x, y, autoAlpha: o })
+            const e = clamp01(p / 0.22)
+            const ease = 1 - Math.pow(1 - e, 2)
+            const o = 1 - clamp01((p - 0.18) / 0.14)
+            gsap.set(el, { x: lerp(hero.x, door.x, ease), y: lerp(hero.y, door.y, ease), autoAlpha: o })
           },
         }),
       )
