@@ -1,0 +1,85 @@
+.jr-scene {
+  position: relative;
+  height: 100vh;
+}
+
+.jr-pin {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(130% 100% at 50% 40%, #1f1640 0%, #170f30 60%, #100a22 100%);
+}
+
+.jr-stars {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.jr-star {
+  position: absolute;
+  border-radius: 50%;
+  background: #fde374;
+  box-shadow: 0 0 6px 1px rgba(253, 227, 116, 0.7);
+  opacity: 0.4;
+  animation: jr-twinkle 3.6s ease-in-out infinite;
+}
+@keyframes jr-twinkle {
+  0%, 100% { opacity: 0.18; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.jr-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.jr-cap {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  max-width: 300px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.jr-cap-left {
+  left: 7%;
+  text-align: left;
+}
+.jr-cap-right {
+  right: 7%;
+  text-align: right;
+}
+
+.jr-step {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--v2-gold);
+  margin-bottom: 0.5rem;
+}
+
+.jr-cap h3 {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  letter-spacing: 0.05em;
+  color: #f6efe6;
+  margin: 0 0 0.6rem;
+}
+
+.jr-cap p {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: rgba(243, 232, 206, 0.65);
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .jr-cap { max-width: 200px; }
+  .jr-cap-left { left: 5%; }
+  .jr-cap-right { right: 5%; }
+  .jr-cap h3 { font-size: 1.3rem; }
+}

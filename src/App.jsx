@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Hero from './sections/Hero.jsx'
 import WhoScene from './sections/WhoScene.jsx'
+import JourneyScene from './sections/JourneyScene.jsx'
 import GuideDot from './components/GuideDot.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -35,6 +36,7 @@ export default function App() {
     <>
       <Hero />
       <WhoScene />
+      <JourneyScene />
       <GuideDot />
     </>
   )
