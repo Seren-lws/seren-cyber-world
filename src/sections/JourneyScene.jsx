@@ -16,6 +16,60 @@ const ease = (t) => t * t * (3 - 2 * t)
 const lerp = (a, b, t) => a + (b - a) * t
 const clamp01 = (t) => Math.max(0, Math.min(1, t))
 
+// 背景随滚动渐变：相遇(冷紫) → 相爱(暖紫) → 相生(暖金调)
+const BG = [
+  { p: 0.12, a: [20, 24, 60], b: [13, 16, 44], c: [9, 11, 30] }, // 相遇 冷蓝紫
+  { p: 0.5, a: [60, 24, 70], b: [38, 16, 50], c: [22, 10, 36] }, // 相爱 品红紫
+  { p: 0.88, a: [66, 50, 28], b: [44, 32, 22], c: [24, 17, 14] }, // 相生 暖金
+]
+const lerpC = (a, b, t) => [Math.round(lerp(a[0], b[0], t)), Math.round(lerp(a[1], b[1], t)), Math.round(lerp(a[2], b[2], t))]
+const rgb = (a) => `rgb(${a[0]},${a[1]},${a[2]})`
+function interpBg(p) {
+  let k0 = BG[0]
+  let k1 = BG[0]
+  if (p <= BG[0].p) { k0 = k1 = BG[0] } else if (p >= BG[2].p) { k0 = k1 = BG[2] } else {
+    for (let i = 0; i < BG.length - 1; i++) {
+      if (p >= BG[i].p && p <= BG[i + 1].p) { k0 = BG[i]; k1 = BG[i + 1]; break }
+    }
+  }
+  const t = k1.p === k0.p ? 0 : (p - k0.p) / (k1.p - k0.p)
+  const a = lerpC(k0.a, k1.a, t)
+  const b = lerpC(k0.b, k1.b, t)
+  const c = lerpC(k0.c, k1.c, t)
+  return `radial-gradient(130% 100% at 50% 40%, ${rgb(a)} 0%, ${rgb(b)} 60%, ${rgb(c)} 100%)`
+}
+
+// 画布自身的背景色随滚动流动（Bloom 让画布不透明，所以直接驱动 scene.background）
+const BGC = [
+  { p: 0.12, c: [0.06, 0.07, 0.2] }, // 相遇 冷蓝紫
+  { p: 0.5, c: [0.18, 0.07, 0.22] }, // 相爱 品红紫
+  { p: 0.88, c: [0.2, 0.15, 0.09] }, // 相生 暖金
+]
+function bgColorAt(p) {
+  let k0 = BGC[0]
+  let k1 = BGC[0]
+  if (p <= BGC[0].p) { k0 = k1 = BGC[0] } else if (p >= BGC[2].p) { k0 = k1 = BGC[2] } else {
+    for (let i = 0; i < BGC.length - 1; i++) {
+      if (p >= BGC[i].p && p <= BGC[i + 1].p) { k0 = BGC[i]; k1 = BGC[i + 1]; break }
+    }
+  }
+  const t = k1.p === k0.p ? 0 : (p - k0.p) / (k1.p - k0.p)
+  return [lerp(k0.c[0], k1.c[0], t), lerp(k0.c[1], k1.c[1], t), lerp(k0.c[2], k1.c[2], t)]
+}
+
+const JR_STARS = [
+  { t: '8%', l: '12%', s: 2, d: 0 }, { t: '14%', l: '34%', s: 3, d: 1.2 }, { t: '10%', l: '60%', s: 2, d: 0.6 },
+  { t: '18%', l: '82%', s: 3, d: 1.8 }, { t: '24%', l: '6%', s: 2, d: 0.9 }, { t: '28%', l: '48%', s: 2, d: 2.1 },
+  { t: '22%', l: '92%', s: 2, d: 1.5 }, { t: '34%', l: '24%', s: 3, d: 0.3 }, { t: '38%', l: '72%', s: 2, d: 1.0 },
+  { t: '44%', l: '14%', s: 2, d: 2.4 }, { t: '46%', l: '88%', s: 3, d: 0.7 }, { t: '52%', l: '40%', s: 2, d: 1.7 },
+  { t: '56%', l: '66%', s: 2, d: 0.4 }, { t: '60%', l: '8%', s: 3, d: 2.0 }, { t: '64%', l: '94%', s: 2, d: 1.1 },
+  { t: '68%', l: '30%', s: 2, d: 0.5 }, { t: '72%', l: '54%', s: 3, d: 1.9 }, { t: '70%', l: '78%', s: 2, d: 0.8 },
+  { t: '80%', l: '18%', s: 2, d: 2.3 }, { t: '84%', l: '46%', s: 3, d: 0.2 }, { t: '82%', l: '70%', s: 2, d: 1.4 },
+  { t: '88%', l: '88%', s: 2, d: 1.0 }, { t: '90%', l: '10%', s: 2, d: 0.6 }, { t: '40%', l: '58%', s: 2, d: 2.2 },
+  { t: '16%', l: '46%', s: 2, d: 1.3 }, { t: '54%', l: '26%', s: 2, d: 0.9 }, { t: '76%', l: '40%', s: 2, d: 1.6 },
+  { t: '30%', l: '64%', s: 2, d: 0.1 },
+]
+
 // 背景闪烁小星（固定分布，稳定不抖）
 const STARS = Array.from({ length: 30 }, (_, i) => ({
   top: (i * 67) % 100,
@@ -58,6 +112,7 @@ export default function JourneyScene() {
     mount.appendChild(renderer.domElement)
 
     const scene = new THREE.Scene()
+    scene.background = new THREE.Color(0.055, 0.03, 0.12) // 非常深的紫
     const camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 100)
     camera.position.set(0, 0, 11)
 
@@ -313,11 +368,11 @@ export default function JourneyScene() {
     <section id="journey" ref={sectionRef} className="jr-scene">
       <div ref={pinRef} className="jr-pin">
         <div className="jr-stars" aria-hidden="true">
-          {STARS.map((st, i) => (
+          {JR_STARS.map((s, i) => (
             <span
               key={i}
               className="jr-star"
-              style={{ top: `${st.top}%`, left: `${st.left}%`, width: `${st.s}px`, height: `${st.s}px`, animationDelay: `${st.d}s` }}
+              style={{ top: s.t, left: s.l, width: `${s.s}px`, height: `${s.s}px`, animationDelay: `${s.d}s` }}
             />
           ))}
         </div>

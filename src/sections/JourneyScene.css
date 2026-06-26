@@ -13,7 +13,7 @@
 .jr-stars {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 2;
   pointer-events: none;
 }
 .jr-star {
@@ -39,7 +39,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 2;
+  z-index: 3;
   max-width: 300px;
   opacity: 0;
   pointer-events: none;
