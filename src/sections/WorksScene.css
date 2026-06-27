@@ -46,40 +46,16 @@
   width: 780px;
   opacity: 0;
   z-index: 3;
-  -webkit-mask-image: radial-gradient(ellipse 88% 92% at 50% 45%, black 40%, transparent 100%);
-  mask-image: radial-gradient(ellipse 88% 92% at 50% 45%, black 40%, transparent 100%);
 }
 .wk-tree img {
   width: 100%;
   height: auto;
   display: block;
-  position: relative;
-  z-index: 1;
   animation: wk-tree-float 6s ease-in-out infinite;
 }
 @keyframes wk-tree-float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
-}
-
-/* 呼吸光晕（独立于树，不受 mask 影响） */
-.wk-tree-glow {
-  position: absolute;
-  left: 50vw;
-  top: 50%;
-  width: 1000px;
-  height: 1000px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(253, 227, 116, 0.14) 0%, rgba(253, 227, 116, 0.04) 40%, transparent 70%);
-  animation: wk-glow-breathe 4.5s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 2;
-  opacity: 0;
-}
-@keyframes wk-glow-breathe {
-  0%, 100% { transform: translate(-50%, -50%) scale(0.92); }
-  50% { transform: translate(-50%, -50%) scale(1.08); }
 }
 
 /* 流动光带 */

@@ -41,7 +41,6 @@ export default function WorksScene() {
   const pinRef = useRef(null)
   const trackRef = useRef(null)
   const treeRef = useRef(null)
-  const glowRef = useRef(null)
   const dotRef = useRef(null)
   const lineRef = useRef(null)
   const trailRefs = useRef([])
@@ -90,7 +89,6 @@ export default function WorksScene() {
       treeRef.current.style.opacity = treeA.toFixed(3)
       treeRef.current.style.transform =
         `translate(-50%, -50%) scale(${lerp(0.88, 1, treeA).toFixed(3)})`
-      glowRef.current.style.opacity = treeA.toFixed(3)
 
       // ── 轨道平移 ──
       const shiftT = win(p, P.projStart, P.projEnd)
@@ -217,7 +215,6 @@ export default function WorksScene() {
         </div>
 
         <div ref={trackRef} className="wk-track">
-          <div ref={glowRef} className="wk-tree-glow" aria-hidden="true" />
           <div ref={treeRef} className="wk-tree">
             <img src="/tree.png" alt="" draggable="false" />
             <div className="wk-tree-flow" aria-hidden="true" />
