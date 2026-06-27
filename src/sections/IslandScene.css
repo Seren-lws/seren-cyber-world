@@ -1,6 +1,6 @@
 .is-scene {
   position: relative;
-  height: 240vh;
+  height: 170vh;
   background: #160e2c;
 }
 
@@ -10,16 +10,13 @@
   height: 100vh;
   overflow: hidden;
   background: radial-gradient(130% 110% at 50% 38%, #2e2150 0%, #211743 55%, #160e2c 100%);
-  will-change: opacity;
 }
 
-/* 镜头推进时被放大的整座岛世界（以书为中心） */
+/* 整座岛世界 */
 .is-world {
   position: absolute;
   inset: 0;
   z-index: 0;
-  transform-origin: 54% 53%;
-  will-change: transform;
 }
 
 .is-back {
@@ -135,42 +132,70 @@
   will-change: transform, opacity;
 }
 
-/* 岛上那本抽象的、翻开的发光书（镜头推进的焦点 ·"我是谁"的入口） */
+/* 岛上那本会发光的书 ·「我是谁」的入口（可点击） */
 .is-book {
   position: absolute;
-  left: 55%;
-  top: 54%;
-  width: 38px;
-  height: 28px;
-  margin: -14px 0 0 -19px;
+  left: 57%;
+  top: 43%;
+  width: 24px;
+  height: 18px;
+  margin: -9px 0 0 -12px;
   z-index: 4;
-  pointer-events: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  pointer-events: auto;
+  cursor: pointer;
   animation: is-book-pulse 3.8s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.is-book:hover {
+  transform: scale(1.2);
 }
 .is-book-page {
   position: absolute;
   top: 0;
-  width: 19px;
-  height: 28px;
-  background: linear-gradient(180deg, rgba(255, 244, 204, 0.92), rgba(253, 227, 116, 0.55));
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(255, 244, 204, 0.95), rgba(253, 227, 116, 0.6));
 }
 .is-book-l {
   left: 0;
   transform-origin: right center;
-  transform: perspective(150px) rotateY(34deg);
-  border-radius: 3px 0 0 3px;
+  transform: perspective(120px) rotateY(32deg);
+  border-radius: 2px 0 0 2px;
   box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.7);
 }
 .is-book-r {
   right: 0;
   transform-origin: left center;
-  transform: perspective(150px) rotateY(-34deg);
-  border-radius: 0 3px 3px 0;
+  transform: perspective(120px) rotateY(-32deg);
+  border-radius: 0 2px 2px 0;
   box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.7);
 }
 @keyframes is-book-pulse {
-  0%, 100% { filter: drop-shadow(0 0 6px rgba(253, 227, 116, 0.65)); }
-  50% { filter: drop-shadow(0 0 16px rgba(253, 227, 116, 1)); }
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(253, 227, 116, 0.7)); }
+  50% { filter: drop-shadow(0 0 14px rgba(253, 227, 116, 1)); }
+}
+
+/* 召唤光点：停在书旁，提示「点我」 */
+.is-bookdot {
+  position: absolute;
+  left: 58%;
+  top: 39%;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  z-index: 5;
+  border-radius: 50%;
+  background: #fff4cc;
+  box-shadow: 0 0 9px 3px rgba(253, 227, 116, 0.95), 0 0 20px 7px rgba(253, 227, 116, 0.45);
+  pointer-events: none;
+  animation: is-bookdot-pulse 1.8s ease-in-out infinite;
+}
+@keyframes is-bookdot-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.3); }
 }
 
 /* 金光漫屏蒙太奇 */
@@ -183,19 +208,20 @@
   background: radial-gradient(circle at 28% 42%, #ffeeb0 0%, #f7d272 45%, #f3c878 100%);
 }
 
-/* 贯穿的光点（在小岛旁现身） */
-.is-guide {
+/* 点击书时，从书那里扩散吞屏的金光（与首页推门同款光扩散） */
+.is-clickbloom {
   position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 45;
-  width: 12px;
-  height: 12px;
-  margin: -6px 0 0 -6px;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  z-index: 60;
   border-radius: 50%;
+  background: radial-gradient(circle, #fff7e6 0%, #ffe9b0 52%, #f7d272 100%);
   opacity: 0;
+  display: none;
   pointer-events: none;
-  background: radial-gradient(circle, #fffdf2 0%, #fde374 45%, rgba(253, 227, 116, 0) 72%);
-  box-shadow: 0 0 14px 4px rgba(253, 227, 116, 0.85), 0 0 30px 10px rgba(253, 227, 116, 0.4);
+  transform: scale(0);
   will-change: transform, opacity;
 }
