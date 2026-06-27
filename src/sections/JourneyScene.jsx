@@ -112,7 +112,7 @@ export default function JourneyScene() {
     mount.appendChild(renderer.domElement)
 
     const scene = new THREE.Scene()
-    scene.background = new THREE.Color(0.055, 0.03, 0.12) // 非常深的紫
+    scene.background = new THREE.Color(0.035, 0.025, 0.081)
     const camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 100)
     camera.position.set(0, 0, 11)
 
