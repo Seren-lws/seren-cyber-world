@@ -35,51 +35,71 @@
   z-index: 1;
 }
 
+/* 文字直接写在背景上（透明、无卡片），全部左对齐 */
 .jr-cap {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 3;
-  max-width: 300px;
+  width: min(44vw, 520px);
   opacity: 0;
   pointer-events: none;
 }
 
 .jr-cap-left {
-  left: 7%;
+  left: 8%;
   text-align: left;
 }
+/* 相爱放右边空白处，但文本仍然左对齐 */
 .jr-cap-right {
-  right: 7%;
-  text-align: right;
+  right: 8%;
+  text-align: left;
 }
 
 .jr-step {
   display: block;
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.14em;
   color: var(--v2-gold);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+  text-shadow: 0 1px 12px rgba(8, 5, 18, 0.9);
 }
 
 .jr-cap h3 {
   font-family: var(--font-serif);
-  font-size: 1.7rem;
-  letter-spacing: 0.05em;
+  font-size: 2rem;
+  letter-spacing: 0.2em;
   color: #f6efe6;
-  margin: 0 0 0.6rem;
+  margin: 0 0 1.4rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7), 0 2px 20px rgba(8, 5, 18, 0.85);
 }
 
 .jr-cap p {
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  color: rgba(243, 232, 206, 0.65);
-  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.04rem;
+  line-height: 2;
+  color: rgba(245, 236, 216, 0.9);
+  margin: 0 0 1.5em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65), 0 2px 18px rgba(8, 5, 18, 0.9);
+}
+.jr-cap p:last-child {
+  margin-bottom: 0;
+}
+
+/* 结尾的重点字：金色、放大 */
+.jr-em {
+  color: #fde374 !important;
+  font-size: 1.7rem !important;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 24px rgba(253, 227, 116, 0.5) !important;
 }
 
 @media (max-width: 720px) {
-  .jr-cap { max-width: 200px; }
-  .jr-cap-left { left: 5%; }
-  .jr-cap-right { right: 5%; }
-  .jr-cap h3 { font-size: 1.3rem; }
+  .jr-cap { width: 80vw; }
+  .jr-cap-left { left: 7%; }
+  .jr-cap h3 { font-size: 1.6rem; }
+  .jr-cap p { font-size: 0.98rem; }
+  .jr-em { font-size: 1.4rem !important; }
 }
