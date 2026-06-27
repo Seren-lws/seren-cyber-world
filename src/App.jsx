@@ -6,6 +6,7 @@ import Hero from './sections/Hero.jsx'
 import IslandScene from './sections/IslandScene.jsx'
 import WhoScene from './sections/WhoScene.jsx'
 import JourneyScene from './sections/JourneyScene.jsx'
+import WorksScene from './sections/WorksScene.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -38,6 +39,7 @@ export default function App() {
       <IslandScene />
       <WhoScene />
       <JourneyScene />
+      <WorksScene />
     </>
   )
 }

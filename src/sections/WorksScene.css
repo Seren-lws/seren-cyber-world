@@ -1,0 +1,26 @@
+.wk-scene {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  /* 贴近「我和AI」WebGL 画布实际显示的那层深紫 indigo */
+  background: radial-gradient(130% 100% at 50% 38%, #2d2860 0%, #241e4c 58%, #1a143a 100%);
+}
+
+.wk-stars {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.wk-star {
+  position: absolute;
+  border-radius: 50%;
+  background: #fde374;
+  box-shadow: 0 0 6px 1px rgba(253, 227, 116, 0.7);
+  opacity: 0.4;
+  animation: wk-twinkle 3.6s ease-in-out infinite;
+}
+@keyframes wk-twinkle {
+  0%, 100% { opacity: 0.18; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
