@@ -6,7 +6,6 @@ import Hero from './sections/Hero.jsx'
 import IslandScene from './sections/IslandScene.jsx'
 import WhoScene from './sections/WhoScene.jsx'
 import JourneyScene from './sections/JourneyScene.jsx'
-import GuideDot from './components/GuideDot.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -39,7 +38,6 @@ export default function App() {
       <IslandScene />
       <WhoScene />
       <JourneyScene />
-      <GuideDot />
     </>
   )
 }

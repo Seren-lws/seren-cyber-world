@@ -82,9 +82,9 @@ export default function IslandScene() {
         el.style.opacity = (0.35 + 0.65 * Math.abs(Math.sin(t * 1.4 + d.ph))).toFixed(2)
       })
 
-      // —— 进场：金光漫屏蒙太奇（从门那侧涌起 → 退去露出小岛） ——
+      // —— 进场：金光漫屏蒙太奇（承接首页门口炸光 → 快速铺满 → 退去露出小岛） ——
       if (floodRef.current) {
-        const fo = ep < 0.25 ? ep / 0.25 : ep < 0.6 ? 1 : 1 - (ep - 0.6) / 0.4
+        const fo = ep < 0.12 ? ep / 0.12 : ep < 0.62 ? 1 : 1 - (ep - 0.62) / 0.38
         floodRef.current.style.opacity = clamp01(fo).toFixed(3)
       }
       // —— 光点：金光退去后从门那侧飞到岛旁（镜头开始推进时淡出） ——
