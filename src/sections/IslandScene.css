@@ -1,6 +1,6 @@
 .is-scene {
   position: relative;
-  height: 170vh;
+  height: 260vh;
   background: #160e2c;
 }
 
@@ -12,11 +12,12 @@
   background: radial-gradient(130% 110% at 50% 38%, #2e2150 0%, #211743 55%, #160e2c 100%);
 }
 
-/* 整座岛世界 */
+/* 整座岛世界（镜头推进时以书为中心放大） */
 .is-world {
   position: absolute;
   inset: 0;
   z-index: 0;
+  will-change: transform;
 }
 
 .is-back {
@@ -132,7 +133,7 @@
   will-change: transform, opacity;
 }
 
-/* 岛上那本会发光的书 ·「我是谁」的入口（可点击） */
+/* 岛上那本会发光的书 ·「我是谁」的入口（镜头推进的焦点） */
 .is-book {
   position: absolute;
   left: 57%;
@@ -141,16 +142,9 @@
   height: 18px;
   margin: -9px 0 0 -12px;
   z-index: 4;
-  padding: 0;
-  border: 0;
-  background: none;
-  pointer-events: auto;
-  cursor: pointer;
+  pointer-events: none;
   animation: is-book-pulse 3.8s ease-in-out infinite;
-  transition: transform 0.3s ease;
-}
-.is-book:hover {
-  transform: scale(1.2);
+  will-change: filter;
 }
 .is-book-page {
   position: absolute;
@@ -178,26 +172,6 @@
   50% { filter: drop-shadow(0 0 14px rgba(253, 227, 116, 1)); }
 }
 
-/* 召唤光点：停在书旁，提示「点我」 */
-.is-bookdot {
-  position: absolute;
-  left: 58%;
-  top: 39%;
-  width: 9px;
-  height: 9px;
-  margin: -4.5px 0 0 -4.5px;
-  z-index: 5;
-  border-radius: 50%;
-  background: #fff4cc;
-  box-shadow: 0 0 9px 3px rgba(253, 227, 116, 0.95), 0 0 20px 7px rgba(253, 227, 116, 0.45);
-  pointer-events: none;
-  animation: is-bookdot-pulse 1.8s ease-in-out infinite;
-}
-@keyframes is-bookdot-pulse {
-  0%, 100% { opacity: 0.5; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.3); }
-}
-
 /* 金光漫屏蒙太奇 */
 .is-flood {
   position: fixed;
@@ -208,20 +182,18 @@
   background: radial-gradient(circle at 28% 42%, #ffeeb0 0%, #f7d272 45%, #f3c878 100%);
 }
 
-/* 点击书时，从书那里扩散吞屏的金光（与首页推门同款光扩散） */
-.is-clickbloom {
-  position: fixed;
+/* 镜头推进到书后，从书那里漫开吞屏的金光（接进翻书页） */
+.is-bookbloom {
+  position: absolute;
   left: 50%;
   top: 50%;
-  width: 40px;
-  height: 40px;
-  margin: -20px 0 0 -20px;
-  z-index: 60;
+  width: 44px;
+  height: 44px;
+  z-index: 50;
   border-radius: 50%;
   background: radial-gradient(circle, #fff7e6 0%, #ffe9b0 52%, #f7d272 100%);
   opacity: 0;
-  display: none;
   pointer-events: none;
-  transform: scale(0);
+  transform: translate(-50%, -50%) scale(0);
   will-change: transform, opacity;
 }

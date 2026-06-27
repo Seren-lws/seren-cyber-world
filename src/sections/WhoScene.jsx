@@ -20,6 +20,8 @@ export default function WhoScene() {
   const pageRef = useRef(null)
   const coverRef = useRef(null)
   const textRef = useRef(null)
+  const goldRef = useRef(null)
+  const dotRef = useRef(null)
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -27,32 +29,55 @@ export default function WhoScene() {
       gsap.set(coverRef.current, { opacity: 0 })
       gsap.set(pageRef.current, { scale: 2, rotateX: 0, rotateY: 0 })
       gsap.set(textRef.current.children, { opacity: 1, y: 0 })
+      if (goldRef.current) goldRef.current.style.opacity = '0'
+      if (dotRef.current) gsap.set(dotRef.current, { opacity: 0 })
       return
     }
 
     let tl
+    let goldST
+    const clamp01 = (t) => Math.max(0, Math.min(1, t))
     const build = () => {
       gsap.set(coverRef.current, { rotateY: 0, opacity: 1 })
-      gsap.set(pageRef.current, { scale: 1, rotateY: -15, rotateX: 7, transformPerspective: 1200 })
+      gsap.set(pageRef.current, { scale: 1, rotateY: -15, rotateX: 7, opacity: 1, transformPerspective: 1200 })
       gsap.set(textRef.current.children, { opacity: 0, y: 14 })
+      gsap.set(dotRef.current, { opacity: 0, scale: 0.3 })
+
+      // 进场金光：承接小岛「漫开的金光」→ 快速铺满 → 退去露出书
+      goldST = ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: 'top bottom',
+        end: 'top top',
+        scrub: 0.5,
+        onUpdate: (self) => {
+          const ep = self.progress
+          const fo = ep < 0.12 ? ep / 0.12 : ep < 0.55 ? 1 : 1 - (ep - 0.55) / 0.45
+          if (goldRef.current) goldRef.current.style.opacity = clamp01(fo).toFixed(3)
+        },
+      })
 
       tl = gsap.timeline({
         scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: '+=3000', pin: true, anticipatePin: 1, scrub: 0.6 },
       })
-      // 1) 书摆正 → 封面翻开（贯穿光点由 GuideDot 负责飞入）
-      tl.to(pageRef.current, { rotateY: 0, rotateX: 0, duration: 0.2, ease: 'power2.inOut' }, 0.06)
-        .to(coverRef.current, { rotateY: -150, duration: 0.3, ease: 'power2.inOut' }, 0.12)
-        .to(coverRef.current, { opacity: 0, duration: 0.06 }, 0.4)
+      // 1) 书摆正 → 封面翻开
+      tl.to(pageRef.current, { rotateY: 0, rotateX: 0, duration: 0.18, ease: 'power2.inOut' }, 0.05)
+        .to(coverRef.current, { rotateY: -150, duration: 0.28, ease: 'power2.inOut' }, 0.1)
+        .to(coverRef.current, { opacity: 0, duration: 0.05 }, 0.36)
         // 2) 钻进书页：黄页放大铺满
-        .to(pageRef.current, { scale: 5.5, duration: 0.24, ease: 'power2.in' }, 0.4)
-        // 3) 介绍一行行淡入
-        .to(textRef.current.children, { opacity: 1, y: 0, stagger: 0.05, duration: 0.16, ease: 'power2.out' }, 0.62)
-        // 4) 慢慢拉远 → 露出星夜，书页变成漂浮的卡片
-        .to(pageRef.current, { scale: 2, duration: 0.3, ease: 'power2.inOut' }, 0.84)
+        .to(pageRef.current, { scale: 5.5, duration: 0.2, ease: 'power2.in' }, 0.36)
+        // 3) 介绍一行行淡入（0.64~0.82 停住给阅读）
+        .to(textRef.current.children, { opacity: 1, y: 0, stagger: 0.04, duration: 0.14, ease: 'power2.out' }, 0.5)
+        // 4) 读完：文字淡出
+        .to(textRef.current.children, { opacity: 0, y: -8, stagger: 0.02, duration: 0.08, ease: 'power2.in' }, 0.82)
+        // 5) 书页缩成一点、化掉 → 露出深紫星夜（与「我和AI」同底色）
+        .to(pageRef.current, { scale: 0.04, opacity: 0, duration: 0.15, ease: 'power2.in' }, 0.85)
+        // 6) 留下一点光 —— 贯穿全站的「你」，接进下一页的星
+        .fromTo(dotRef.current, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.08, ease: 'power2.out' }, 0.93)
     }
     build()
 
     const onResize = () => {
+      goldST && goldST.kill()
       tl && tl.scrollTrigger && tl.scrollTrigger.kill()
       tl && tl.kill()
       build()
@@ -61,6 +86,7 @@ export default function WhoScene() {
     window.addEventListener('resize', onResize)
     return () => {
       window.removeEventListener('resize', onResize)
+      goldST && goldST.kill()
       tl && tl.scrollTrigger && tl.scrollTrigger.kill()
       tl && tl.kill()
     }
@@ -69,12 +95,14 @@ export default function WhoScene() {
   return (
     <section ref={sectionRef} className="ws-scene">
       <div ref={pinRef} className="ws-pin">
+        {/* 进场金光：与小岛漫开的金光无缝衔接 */}
+        <div ref={goldRef} className="ws-gold" aria-hidden="true" />
         {/* 后面的星夜（拉远后露出的画面） */}
         <div ref={nightRef} className="ws-night" aria-hidden="true">
           <div className="ws-lightfall">
             <Lightfall
               colors={['#fde374', '#9a6ee0', '#f3e8ce']}
-              backgroundColor="#2a2147"
+              backgroundColor="#100a22"
               speed={0.4}
               streakCount={3}
               streakWidth={1}
@@ -103,6 +131,9 @@ export default function WhoScene() {
             </div>
           </div>
         </div>
+
+        {/* 收尾留下的一点光 —— 贯穿全站的「你」，接进「我和AI」的星 */}
+        <div ref={dotRef} className="ws-souldot" aria-hidden="true" />
 
         {/* 介绍文字（固定层，逐行淡入） */}
         <div ref={textRef} className="ws-text">

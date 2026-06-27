@@ -26,13 +26,9 @@ export default function App() {
     gsap.ticker.add(ticker)
     gsap.ticker.lagSmoothing(0)
 
-    // 暴露给「点击书→金光扩散→翻书页」的转场用
-    window.__lenis = lenis
-
     return () => {
       gsap.ticker.remove(ticker)
       lenis.destroy()
-      delete window.__lenis
     }
   }, [])
 

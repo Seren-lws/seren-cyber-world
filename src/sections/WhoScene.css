@@ -7,7 +7,17 @@
   position: relative;
   height: 100vh;
   overflow: hidden;
-  background: #2e2547;
+  background: #130b24;
+}
+
+/* 进场金光：承接小岛漫开的金光，铺满后退去露出书 */
+.ws-gold {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 46%, #fff7e6 0%, #ffe9b0 48%, #f7d272 100%);
 }
 
 /* —— 后面的星夜 —— */
@@ -15,8 +25,8 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  /* 比首页(#433763)稍深一点点的紫，衔接不割裂 */
-  background: radial-gradient(130% 100% at 50% 32%, #3e3260 0%, #342a52 58%, #2a2147 100%);
+  /* 与「我和AI」(jr-pin) 同一套深紫，结尾的星夜直接对齐下一页，缝处深紫接深紫 */
+  background: radial-gradient(130% 100% at 50% 40%, #1f1640 0%, #170f30 60%, #100a22 100%);
 }
 
 .ws-lightfall {
@@ -126,6 +136,22 @@
   background: #fff7e0;
   box-shadow: 0 0 22px 6px rgba(253, 227, 116, 0.95), 0 0 48px 18px rgba(253, 227, 116, 0.4);
   z-index: 2;
+}
+
+/* 收尾留下的一点光 —— 贯穿全站的「你」 */
+.ws-souldot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  z-index: 5;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffdf2 0%, #fde374 45%, rgba(253, 227, 116, 0) 72%);
+  box-shadow: 0 0 18px 6px rgba(253, 227, 116, 0.85), 0 0 40px 14px rgba(253, 227, 116, 0.4);
+  pointer-events: none;
+  opacity: 0;
 }
 
 /* —— 介绍文字（固定层） —— */
